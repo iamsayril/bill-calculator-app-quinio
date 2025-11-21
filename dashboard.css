@@ -535,3 +535,102 @@ body.page-dashboard {
 .records-table tr.empty-row {
     display: none;
 }
+
+/* ---------------------------------------------
+   13. ACCOUNT PAGE
+--------------------------------------------- */
+
+.account-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    font-family: 'Poppins', sans-serif;
+    color: var(--color-text-dark);
+}
+
+/* Profile Box */
+.profile-box {
+    background: #e3e0dc;
+    padding: 25px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.profile-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-photo {
+    width: 80px;
+    height: 80px;
+    background: #4d6fa9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-photo i {
+    color: white;
+    font-size: 40px;
+}
+
+.profile-text h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--color-text-dark);
+}
+
+.profile-text p {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Eye icon */
+.view-icon {
+    font-size: 28px;
+    color: var(--color-text-dark);
+    opacity: 0.9;
+}
+
+/* List Items */
+.account-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.account-item {
+    background: white;
+    border: 1px solid #bfbfbf;
+    border-radius: 12px;
+    padding: 15px 18px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.account-item:hover {
+    background: #f0ece6;
+}
+
+.account-item i {
+    font-size: 18px;
+    color: var(--color-dark);
+}
+
+.account-item .arrow {
+    margin-left: auto;
+    font-size: 18px;
+    color: var(--color-dark);
+}

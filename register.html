@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration - WiseWatts</title>
+    <title>Register - WiseWatts</title>
     <link rel="stylesheet" href="style.css"> 
     <link rel="stylesheet" href="register.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700&family=Poppins:wght@400;600;900&family=Roboto+Serif:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -23,8 +23,7 @@
                 <a href="index.html">Home</a>
                 <a href="#">Contact</a>
             </nav>
-            <!-- Top button now clickable internally -->
-            <button class="signin-btn" id="navbarSignInBtn">Sign In</button>
+            <a href="login.html" class="signin-btn">Sign In</a>
         </div>
     </header>
 
@@ -32,36 +31,33 @@
     <div class="form-page-container">
         <h2 class="form-title">Create <span class="accent">Account</span></h2>
         
-        <form class="register-form" id="register-form">
+        <form class="register-form" action="dashboard.html" method="get">
             
             <!-- Name Input -->
-            <div class="input-group" id="name-group">
+            <div class="input-group">
                 <i class="fas fa-user icon"></i>
-                <input type="text" id="name" name="name" placeholder="Name">
-                <span class="error-message">Name can't be blank</span>
+                <input type="text" id="name" name="name" placeholder="Name" required>
             </div>
             
             <!-- Email Input -->
-            <div class="input-group" id="email-group">
+            <div class="input-group">
                 <i class="fas fa-envelope icon"></i>
-                <input type="email" id="email" name="email" placeholder="Email">
-                <span class="error-message">Please enter a valid email</span>
+                <input type="email" id="email" name="email" placeholder="Email" required>
             </div>
 
             <!-- Password Input -->
-            <div class="input-group" id="password-group">
+            <div class="input-group">
                 <i class="fas fa-lock icon"></i>
-                <input type="password" id="password" name="password" placeholder="Password">
-                <span class="error-message">Password can't be blank</span>
+                <input type="password" id="password" name="password" placeholder="Password" required>
             </div>
 
             <!-- Confirm Password Input -->
-            <div class="input-group" id="confirm-password-group">
+            <div class="input-group">
                 <i class="fas fa-lock icon"></i>
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password">
-                <span class="error-message" id="confirm-password-error">Passwords do not match</span>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required>
             </div>
             
+            <!-- Sign Up Button -->
             <button type="submit" class="sign-up-btn">Sign Up</button>
             
             <p class="terms-text">
@@ -70,6 +66,7 @@
             
             <div class="separator">or</div>
             
+            <!-- Social Login Buttons -->
             <div class="social-login">
                 <button type="button" class="social-btn google-btn">
                     <i class="fab fa-google"></i> Google
@@ -79,23 +76,12 @@
                 </button>
             </div>
 
+            <!-- Sign In Link -->
             <p class="login-link">
                 Already have an account? <a href="login.html">Sign In</a>
             </p>
         </form>
     </div>
 
-    <!-- JS for internal navigation -->
-    <script>
-        // Navbar Sign In button click
-        document.getElementById('navbarSignInBtn').addEventListener('click', function() {
-            window.location.href = 'login.html';
-        });
-
-        // Optional: you can add form validation or navigation here if needed
-    </script>
-
-    <!-- External JS -->
-    <script src="script.js" defer></script>
 </body>
 </html>
