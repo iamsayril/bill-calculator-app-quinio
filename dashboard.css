@@ -1,0 +1,537 @@
+/* ---------------------------------------------
+   1. ROOT VARIABLES
+--------------------------------------------- */
+:root {
+    --color-dark: #2b1a11;
+    --color-primary: #885309;
+    --color-white: #ffffff;
+    --color-text-dark: #3a210d;
+    --color-text-light: #f7e7cc;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ---------------------------------------------
+   2. GENERAL PAGE SETTINGS
+--------------------------------------------- */
+body.page-dashboard {
+    font-family: 'Poppins', sans-serif;
+    background-color: #F7F3EB;
+    color: var(--color-text-dark);
+    overflow-x: hidden;
+}
+
+/* ---------------------------------------------
+   3. NAVBAR
+--------------------------------------------- */
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #A8A29A;
+    padding: 10px 75px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    width: 75px;
+}
+
+.logo h1 {
+    font-size: 36px;
+    font-family: 'Roboto Serif', serif;
+    color: white;
+    font-weight: 700;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Profile Dropdown */
+.profile-dropdown {
+    position: relative;
+}
+
+.user-profile-link {
+    display: block;
+}
+
+.user-profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.user-profile-picture:hover {
+    opacity: 0.7;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 120%;
+    min-width: 180px;
+    padding: 8px 0;
+    background: var(--color-white);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: var(--color-text-dark);
+    font-size: 15px;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f4f4f4;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 8px 0;
+}
+
+.logout-link {
+    color: #D93025 !important;
+}
+
+/* ---------------------------------------------
+   4. LAYOUT WRAPPER
+--------------------------------------------- */
+.dashboard-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 25px 75px;
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* ---------------------------------------------
+   5. SIDEBAR
+--------------------------------------------- */
+.sidebar {
+    width: 250px;
+    background: var(--color-white);
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.sidebar-nav ul {
+    list-style: none;
+}
+
+.sidebar-nav li {
+    margin-bottom: 10px;
+}
+
+/* Sidebar Links */
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px; 
+    padding: 14px 16px; 
+    font-family: 'Roboto Serif', serif; 
+    font-weight: 600; 
+    font-size: 16px;
+    color: var(--color-text-dark);
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.25s;
+}
+
+.sidebar-nav a i {
+    width: 20px;
+    text-align: center;
+    color: #888;
+}
+
+.sidebar-nav a:hover {
+    background: #EDE8DF;
+}
+
+.sidebar-nav a.active {
+    color: var(--color-dark);
+    background: #EFE9E0;
+}
+
+.sidebar-nav a.active i {
+    color: var(--color-primary);
+}
+
+/* ---------------------------------------------
+   6. MAIN CONTENT
+--------------------------------------------- */
+.main-content {
+    flex-grow: 1;
+    display: grid;
+    gap: 25px;
+}
+
+/* ---------------------------------------------
+   7. CARDS
+--------------------------------------------- */
+.card {
+    background: var(--color-white);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.card h3 {
+    font-family: 'Roboto Serif', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Total Bill Card */
+.card-total-bill .currency-symbol {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.card-total-bill .bill-amount {
+    font-size: 58px;
+    font-weight: 800;
+    margin-left: 10px;
+}
+
+.card-total-bill p {
+    margin-top: 18px;
+    font-size: 15px;
+    opacity: 0.85;
+}
+
+/* ---------------------------------------------
+   8. DASHBOARD GRID
+--------------------------------------------- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 25px;
+}
+
+.chart-container {
+    height: 250px;
+}
+
+/* Appliance Chart */
+.appliance-chart-content {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+    height: 260px;
+}
+
+.chart-pie-wrapper {
+    width: 180px;
+    height: 180px;
+}
+
+.chart-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.legend-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+}
+
+.legend-color-box {
+    width: 15px;
+    height: 15px;
+    border-radius: 4px;
+}
+
+.legend-percent {
+    font-weight: 700;
+}
+
+/* ---------------------------------------------
+   9. BILLING BAR
+--------------------------------------------- */
+.billing-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 12px;
+    background: #EFEFEF;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 12px;
+    background: #FACC15;
+}
+
+.billing-days-left {
+    font-family: 'Roboto Serif', serif;
+    font-weight: 700;
+}
+
+/* ---------------------------------------------
+   10. CALCULATOR PAGE
+--------------------------------------------- */
+.calculator-card {
+    background: var(--color-white);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.calculator-card h2 {
+    font-family: 'Roboto Serif', serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.calculator-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.calc-input label,
+.calc-output label {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.calc-input input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d6d3ce;
+    border-radius: 12px;
+    background: #faf8f4;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.calc-input input:focus {
+    border-color: #c8b08a;
+    background: #fff;
+}
+
+.calculate-btn {
+    grid-column: span 2;
+    background: #A15C07;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.calculate-btn:hover {
+    background: #7c4406;
+}
+
+.calc-total-display {
+    background: #f6f1e8;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 26px;
+    font-family: 'Roboto Serif', serif;
+    font-weight: 700;
+}
+
+/* ---------------------------------------------
+   BUTTON GROUP FOR CALCULATOR
+--------------------------------------------- */
+.button-group {
+    grid-column: span 2;  
+    display: flex;  
+    justify-content: flex-start;  
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.calculate-btn,
+.save-btn {
+    background: #A15C07;
+    padding: 14px 20px;
+    border-radius: 12px;
+    border: none;
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    min-width: 120px; 
+    flex: 1; 
+}
+
+.save-btn {
+    background: #7C7C7C;  
+}
+
+.calculate-btn:hover {
+    background: #7c4406;
+}
+
+.save-btn:hover {
+    background: #5a5a5a;
+}
+
+/* ---------------------------------------------
+   12. RECORDS TABLE (UPDATED)
+--------------------------------------------- */
+.records-card {
+    background: var(--color-white);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    font-family: 'Poppins', sans-serif;
+}
+
+.records-card h2 {
+    font-family: 'Roboto Serif', serif;
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.records-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    color: var(--color-text-dark);
+}
+
+.records-table thead tr {
+    background-color: #e6dfd4;
+    color: var(--color-dark);
+    font-weight: 700;
+}
+
+.records-table th,
+.records-table td {
+    padding: 14px 20px;
+    text-align: left;
+}
+
+/* Hover effect for rows */
+.records-table tbody tr:hover {
+    background-color: #f4f0e8;
+}
+
+/* Footer row */
+.records-table tfoot tr {
+    font-weight: 700;
+    color: var(--color-dark);
+    border-top: 2px solid var(--color-primary);
+}
+
+/* Actions column */
+.records-table td.actions {
+    display: flex;
+    align-items: center;       /* keep vertical centering */
+    gap: 10px;
+    padding: 10px 0;
+    justify-content: flex-start; /* align buttons to start */
+    padding-left: -30%;  
+}
+
+/* Buttons */
+.btn-view,
+.btn-delete {
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* View button */
+.btn-view {
+    background: #A15C07;
+    color: white;
+}
+
+.btn-view:hover {
+    background: #7c4406;
+}
+
+/* Delete button */
+.btn-delete {
+    background: #D93025;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #b3231b;
+}
+
+/* Total column in Pesos */
+.records-table td.total {
+    font-weight: 700;
+    color: var(--color-dark);
+}
+
+/* Prepend ₱ symbol automatically */
+.records-table td.total::before {
+    content: "₱ ";
+    font-weight: 700;
+}
+
+/* Style for empty table row */
+.records-table tr.empty-row td {
+    text-align: center;
+    padding: 20px;
+    opacity: 0.6;
+    font-style: italic;
+    color: #555;
+}
+
+/* Center icons in Actions column */
+.records-table td.actions i {
+    margin-right: 5px;
+}
+
+.records-table tr.empty-row {
+    display: none;
+}

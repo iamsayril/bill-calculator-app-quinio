@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - WiseWatts</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700&family=Poppins:wght@400;600;900&family=Roboto+Serif:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body class="page-dashboard">
+
+    <!-- HEADER -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="removebg-removebg-preview.png" alt="WiseWatts Logo" />
+            <h1>WiseWatts</h1>
+        </div>
+
+        <div class="nav-right">
+            <div class="profile-dropdown">
+                <a href="#" class="user-profile-link" id="profile-toggle">
+                    <img src="user.png" alt="User Profile" class="user-profile-picture">
+                </a>
+
+                <div class="dropdown-menu" id="profile-menu">
+                    <a href="account.html"><i class="fas fa-cog"></i> <span>Settings</span></a>
+                    <a href="billing.html"><i class="fas fa-wallet"></i> <span>Billing</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a href="login.html" class="logout-link"><i class="fas fa-sign-out-alt"></i> <span>Log Out</span></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- DASHBOARD CONTAINER -->
+    <div class="dashboard-container">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html" class="active"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a href="calculator.html"><i class="fas fa-calculator"></i> Calculator</a></li>
+                    
+                    <li><a href="#"><i class="fas fa-file-invoice"></i> Records</a></li>
+                    <li><a href="#"><i class="fas fa-user"></i> Account</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="card card-total-bill">
+                <span class="currency-symbol">₱</span>
+                <span class="bill-amount">3,280</span>
+                <p>Total: 275 Kwh - Average daily: 9.2 Kwh</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card card-usage">
+                    <h3>Usage This Month</h3>
+                    <div class="chart-container">
+                        <canvas id="usageChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card card-appliance">
+                    <h3>Appliance Consumption</h3>
+                    <div class="appliance-chart-content">
+                        <div class="chart-pie-wrapper">
+                            <canvas id="applianceChart"></canvas>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <span class="legend-color-box" style="background-color: #3B82F6;"></span>
+                                <span>Air (AC)</span>
+                                <span class="legend-percent">42%</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color-box" style="background-color: #8B5CF6;"></span>
+                                <span>Refrigerator</span>
+                                <span class="legend-percent">19%</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color-box" style="background-color: #14B8A6;"></span>
+                                <span>Washing Mach</span>
+                                <span class="legend-percent">15%</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color-box" style="background-color: #FACC15;"></span>
+                                <span>Lighting</span>
+                                <span class="legend-percent">14%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-billing">
+                <h3>Billing Cycle</h3>
+                <div class="billing-content">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: 73%;"></div>
+                    </div>
+                    <span class="billing-days-left">8 days left</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js" defer></script>
+
+</body>
+</html>

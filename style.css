@@ -1,0 +1,311 @@
+/* Import Google Fonts used in the design */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700&family=Poppins:wght@400;600;900&family=Roboto+Serif:wght@400;600;700;900&display=swap');
+
+/* --- GLOBAL STYLES & COLOR VARIABLES --- */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Define color variables based on the design */
+    --color-dark: #2b1a11; /* Dark Brown/Black for buttons/card headings */
+    --color-primary: #885309; /* Main Hero Brown background */
+    --color-accent-gold: #ffcf70; /* Gold/Yellow Accent */
+    --color-text-light: #f7e7cc; /* Light Text for Hero */
+    --color-text-dark: #3a210d; /* Rich dark brown for section titles */
+    --color-white: #ffffff;
+    --color-off-white-bg: #fdfaf4; /* Softer, creamy off-white for feature background */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #A8A29A; /* NEW solid background */
+    color: var(--color-white);
+    min-height: 100vh; 
+}
+
+
+/* --- NAVBAR --- */
+.navbar {
+    width: 100%;
+    max-width: 1440px;
+    padding: 30px 75px; 
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    width: 75px; 
+    height: auto;
+}
+
+.logo h1 {
+    font-size: 36px;
+    font-family: 'Roboto Serif', serif;
+    color: var(--color-white);
+    font-weight: 700;
+}
+
+.nav-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 40px; 
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 16px;
+    transition: color 0.3s;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: var(--color-accent-gold);
+}
+
+.signin-btn {
+    background: var(--color-dark);
+    padding: 8px 22px;
+    color: var(--color-white);
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'Roboto Serif', serif;
+    font-weight: 600;
+    transition: background 0.3s, border-color 0.3s;
+    text-decoration: none; /* 🔥 added: removes underline */
+}
+
+.signin-btn:hover {
+    background: #4a2d1a;
+}
+
+
+/* --- HERO SECTION (Updated Spacing FIXED) --- */
+.hero {
+    max-width: 1440px;
+    margin: auto;
+    padding: 80px 75px 40px; /* bottom gap reduced from 100px → 40px */
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    min-height: 360px; /* reduced from 500px to reduce large gap */
+}
+
+.hero-left {
+    max-width: 550px;
+    text-align: left;
+    margin-right: 120px; 
+}
+
+.hero-left h2 {
+    font-size: 68px; 
+    font-weight: 500;
+    font-family: 'Roboto Serif', serif;
+    line-height: 1.1;
+    color: var(--color-white);
+    letter-spacing: -2px;
+}
+
+.hero-left h2 span {
+    color: #F7A70C;
+}
+
+.hero-left p {
+    font-size: 22px; 
+    margin: 20px 0 30px;
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-weight: 500; 
+    color: #ffffff;
+    line-height: 1.5;
+}
+
+.calculate-btn {
+    background: var(--color-dark);
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-family: 'Roboto Serif', serif;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none; /* 🔥 remove underline */
+}
+
+
+.calculate-btn:hover {
+    background: #4a2d1a;
+}
+
+.hero-right img {
+    width: 504px; 
+    height: auto;
+}
+
+.hero-right {
+    transform: translateX(-50px); /* move left */
+}
+
+
+/* --- FEATURES SECTION --- */
+.features {
+    text-align: center;
+    margin-top: 80px; /* reduced so it's closer to hero */
+    padding: 60px 75px; 
+}
+
+.section-title {
+    font-size: 38px;
+    font-weight: 700;
+    color: #ffffff; 
+    margin-bottom: 50px;
+    font-family: 'Roboto Serif', serif;
+}
+
+.feature-cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.card {
+    width: 300px;
+    background: var(--color-white);
+    padding: 40px 30px;
+    border-radius: 12px;
+    color: #000;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.card .icon {
+    width: 45px;
+    height: 45px;
+    margin: 0 auto 10px;
+}
+
+.card h3 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: var(--color-dark);
+    font-family: 'Roboto Serif', serif;
+    font-weight: 600; 
+}
+
+.card p {
+    color: #4a4a4a;
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 400; 
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/* --- FOOTER --- */
+footer {
+    padding: 5px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--color-text-dark);
+    background-color: var(--color-off-white-bg);
+}
+
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 1024px) {
+    .navbar, .hero, .features {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        padding-top: 60px;
+        padding-bottom: 40px;
+        justify-content: center; 
+    }
+
+    .hero-left {
+        margin-right: 0; 
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .hero-right img {
+        width: 350px;
+    }
+
+    .feature-cards {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .card {
+        width: 45%; 
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar, .hero, .features {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .logo h1 {
+        font-size: 24px;
+    }
+
+    .nav-right {
+        gap: 15px;
+    }
+
+    nav a {
+        font-size: 14px;
+    }
+
+    .hero-left h2 {
+        font-size: 44px;
+    }
+
+    .hero-left p {
+        font-size: 16px;
+    }
+
+    .feature-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%; 
+    }
+}
+/* Make login page content align with register page */
