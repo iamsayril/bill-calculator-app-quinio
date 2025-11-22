@@ -281,30 +281,28 @@ body.page-dashboard {
 }
 
 /* ---------------------------------------------
-   9. BILLING BAR
+   9. BILLING BAR (Adjusted for text fit)
 --------------------------------------------- */
 .billing-content {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
+    justify-content: flex-start;
+    position: relative;
 }
 
-.progress-bar-container {
-    width: 100%;
-    height: 12px;
-    background: #EFEFEF;
-    border-radius: 6px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 12px;
-    background: #FACC15;
+.card-billing .chart-img {
+    width: 90%;    /* slightly smaller so text fits */
+    height: auto;  /* maintain aspect ratio */
+    object-fit: contain;
+    display: block;
 }
 
 .billing-days-left {
     font-family: 'Roboto Serif', serif;
     font-weight: 700;
+    font-size: 18px;
+    white-space: nowrap;
 }
 
 /* ---------------------------------------------
@@ -633,4 +631,11 @@ body.page-dashboard {
     margin-left: auto;
     font-size: 18px;
     color: var(--color-dark);
+}
+
+.chart-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
