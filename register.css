@@ -1,12 +1,9 @@
-/* --- REGISTRATION FORM OVERRIDES AND LAYOUT --- */
-
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-/* ADDED: Fade-in animation for the form */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -21,7 +18,6 @@ body {
     background-color: #A8A29A; 
 }
 
-/* Ensure the navbar color is correct on this page */
 .navbar {
     background-color: #A8A29A; 
 }
@@ -40,7 +36,6 @@ body {
     animation: fadeIn 0.5s ease-out;
 }
 
-/* Login page specific adjustments to match Create Account */
 body.login-page .form-page-container {
     justify-content: center;
 }
@@ -76,7 +71,6 @@ body.login-page .form-title {
     color: #F7A70C;
 }
 
-/* --- FORM CENTERING FIX --- */
 .register-form {
     width: 100%;
     display: flex;
@@ -84,7 +78,6 @@ body.login-page .form-title {
     align-items: center;
 }
 
-/* --- INPUTS & ICONS --- */
 .input-group {
     position: relative;
     margin-bottom: 20px;
@@ -128,7 +121,6 @@ body.login-page .form-title {
     transition: color 0.2s;
 }
 
-/* --- ENHANCEMENT: ERROR STYLING --- */
 .error-message {
     display: none;
     font-size: 12px;
@@ -151,7 +143,6 @@ body.login-page .form-title {
     color: #D93025;
 }
 
-/* --- BUTTONS --- */
 .sign-up-btn {
     width: 300px; 
     background: var(--color-dark);
@@ -172,7 +163,6 @@ body.login-page .form-title {
     background: #4a2d1a;
 }
 
-/* --- TERMS & CONDITIONS & LINKS --- */
 .terms-text {
     margin-top: 15px;
     font-size: 13px;
@@ -187,7 +177,7 @@ body.login-page .form-title {
 .login-link a,
 .forgot-password-link a {
     color: #0866ff;
-    text-decoration: none; /* removed underline */
+    text-decoration: none; 
     font-weight: 600;
     font-size: 13px;
 }
@@ -196,14 +186,12 @@ body.login-page .form-title {
     text-decoration: none;
 }
 
-/* --- SEPARATOR --- */
 .separator {
     margin: 20px 0;
     color: #ffffff;
     font-size: 14px;
 }
 
-/* --- SOCIAL LOGIN --- */
 .social-login {
     display: flex;
     justify-content: space-between;
@@ -220,8 +208,7 @@ body.login-page .form-title {
     cursor: pointer;
     transition: background 0.3s;
     font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    text-decoration: none; /* remove underline */
+    font-weight: 600;/* remove underline */
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -248,15 +235,11 @@ body.login-page .form-title {
     background-color: #4a67a5;
 }
 
-/* --- SIGN IN LINK --- */
 .login-link {
     font-size: 13px;
     color: #ffffff;
 }
 
-/* ============================================================
---- NEW STYLES FOR FORGOT PASSWORD PAGE ---
-============================================================ */
 
 .form-description {
     color: #ffffff;
@@ -306,7 +289,6 @@ body.login-page .form-title {
     background-color: #4a2d1a;
 }
 
-/* --- RESPONSIVE ADJUSTMENTS --- */
 @media (max-width: 1024px) {
     .navbar, .form-page-container { padding-left: 40px; padding-right: 40px; }
     .form-page-container {
