@@ -61,11 +61,6 @@ body.page-dashboard {
     gap: 40px;
 }
 
-/* Profile Dropdown */
-.profile-dropdown {
-    position: relative;
-}
-
 .user-profile-link {
     display: block;
 }
@@ -80,46 +75,6 @@ body.page-dashboard {
 
 .user-profile-picture:hover {
     opacity: 0.7;
-}
-
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 120%;
-    min-width: 180px;
-    padding: 8px 0;
-    background: var(--color-white);
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.dropdown-menu.show {
-    display: block;
-}
-
-.dropdown-menu a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 15px;
-    text-decoration: none;
-    color: var(--color-text-dark);
-    font-size: 15px;
-}
-
-.dropdown-menu a:hover {
-    background-color: #f4f4f4;
-}
-
-.dropdown-divider {
-    height: 1px;
-    background-color: #eee;
-    margin: 8px 0;
-}
-
-.logout-link {
-    color: #D93025 !important;
 }
 
 /* ---------------------------------------------
@@ -214,21 +169,34 @@ body.page-dashboard {
 }
 
 /* Total Bill Card */
-.card-total-bill .currency-symbol {
+.card-total-bill {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* space between elements */
+}
+
+.card-total-bill .dashboard-title {
+    font-family: 'Roboto Serif', serif;
     font-size: 48px;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    display: block;
+}
+
+.card-total-bill .bill-wrapper {
+    display: flex;
+    align-items: baseline; /* aligns ₱ and number nicely */
+    gap: 6px;
+}
+
+.card-total-bill .currency-symbol {
+    font-size: 38px;
     font-weight: 700;
 }
 
 .card-total-bill .bill-amount {
-    font-size: 58px;
-    font-weight: 800;
-    margin-left: 10px;
-}
-
-.card-total-bill p {
-    margin-top: 18px;
-    font-size: 15px;
-    opacity: 0.85;
+    font-size: 38px;
+    font-weight: 700;
 }
 
 /* ---------------------------------------------
@@ -296,13 +264,6 @@ body.page-dashboard {
     height: auto;
     object-fit: contain;
     display: block;
-}
-
-.billing-days-left {
-    font-family: 'Roboto Serif', serif;
-    font-weight: 700;
-    font-size: 18px;
-    white-space: nowrap;
 }
 
 /* ---------------------------------------------
@@ -527,7 +488,7 @@ body.page-dashboard {
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 25px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto Serif', serif;
     color: var(--color-text-dark);
 }
 
@@ -625,7 +586,8 @@ body.page-dashboard {
 /* ---------------------------------------------
    14. RESPONSIVE ADJUSTMENTS
 --------------------------------------------- */
-/* Tablet & small laptops ≤1024px */
+
+/* ----- Tablets & small laptops ≤1024px ----- */
 @media (max-width: 1024px) {
     .navbar, .main-content, .dashboard-container {
         padding-left: 40px;
@@ -654,7 +616,7 @@ body.page-dashboard {
         display: flex;
         justify-content: space-around;
         padding: 8px 0;
-        border-radius: 0;
+        border-radius: 10;
         box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         position: fixed;
         bottom: 0;
@@ -669,7 +631,7 @@ body.page-dashboard {
         width: 100%;
         justify-content: space-around;
         align-items: center;
-        gap: 30px; /* Added spacing */
+        gap: 30px;
     }
 
     .sidebar-nav a {
@@ -705,7 +667,7 @@ body.page-dashboard {
     }
 }
 
-/* Small screens ≤768px */
+/* ----- Small screens ≤768px ----- */
 @media (max-width: 768px) {
     .navbar, .main-content, .dashboard-container {
         padding-left: 20px;
@@ -727,9 +689,27 @@ body.page-dashboard {
     .card {
         width: 90%;
     }
+
+    .card-total-bill .card-total-bill-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .card-total-bill .dashboard-title {
+        font-size: 28px;
+    }
+
+    .card-total-bill .currency-symbol {
+        font-size: 40px;
+    }
+
+    .card-total-bill .bill-amount {
+        font-size: 48px;
+    }
 }
 
-/* Phones ≤600px */
+/* ----- Phones ≤600px ----- */
 @media (max-width: 600px) {
     .navbar {
         padding: 15px 20px;
@@ -748,24 +728,42 @@ body.page-dashboard {
     }
 
     .card, .calculator-card, .records-card, .profile-box, .account-list {
-        width: 100%;
+        width: 90%;
         max-width: none;
         padding: 14px;
         margin-bottom: 10px;
     }
+
+    .card-total-bill .card-total-bill-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .card-total-bill .dashboard-title {
+        font-size: 26px;
+    }
+
+    .card-total-bill .currency-symbol {
+        font-size: 36px;
+    }
+
+    .card-total-bill .bill-amount {
+        font-size: 42px;
+    }
 }
 
-/* Phones ≤425px - Compact & fixed layout */
+/* ----- Phones ≤425px ----- */
 @media (max-width: 425px) {
     .dashboard-container {
         flex-direction: column;
-        gap: 8px;
-        padding: 8px;
+        gap: 6px;
+        padding: 6px;
     }
 
     .dashboard-grid {
         grid-template-columns: 1fr;
-        gap: 8px;
+        gap: 6px;
     }
 
     .card,
@@ -774,13 +772,13 @@ body.page-dashboard {
     .profile-box,
     .account-list {
         width: 100%;
-        padding: 10px;
-        margin-bottom: 8px;
+        padding: 8px;
+        margin-bottom: 6px;
     }
 
     .calculator-card h2 {
         font-size: 20px;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
     }
 
     .calculator-grid {
@@ -808,19 +806,21 @@ body.page-dashboard {
 
     .appliance-chart-content {
         flex-direction: column;
-        gap: 8px;
+        gap: 6px;
         height: auto;
         justify-content: flex-start;
         align-items: flex-start;
+        padding: 4px;
     }
 
     .chart-pie-wrapper {
-        width: 100px; 
-        height: 100px;
+        width: 90px;
+        height: 90px;
     }
 
     .chart-legend {
-        gap: 6px;
+        flex-direction: column;
+        gap: 4px;
         font-size: 10px;
     }
 
@@ -829,16 +829,29 @@ body.page-dashboard {
         gap: 4px;
     }
 
+    .legend-color-box {
+        width: 12px;
+        height: 12px;
+    }
+
     .legend-percent {
-        font-size: 10px;
+        font-size: 9px;
     }
 
     .billing-content .chart-img {
-        width: 100%;
+        width: 90%;
     }
 
-    .billing-days-left {
-        font-size: 13px;
+    .card-total-bill .dashboard-title {
+        font-size: 24px !important;
+    }
+
+    .card-total-bill .currency-symbol {
+        font-size: 36px;
+    }
+
+    .card-total-bill .bill-amount {
+        font-size: 42px;
     }
 
     .records-table {
@@ -880,9 +893,8 @@ body.page-dashboard {
         gap: 8px;
     }
 
-    /* Sidebar icons bottom */
     .sidebar-nav ul {
-        gap: 25px; /* Increased spacing for small screen */
+        gap: 25px;
     }
 
     .sidebar-nav a {
@@ -906,6 +918,6 @@ body.page-dashboard {
     }
 
     .main-content {
-        margin-bottom: 70px; /* space for bottom nav */
+        margin-bottom: 70px;
     }
 }

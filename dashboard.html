@@ -20,18 +20,10 @@
         </div>
 
         <div class="nav-right">
-            <div class="profile-dropdown">
-                <a href="#" class="user-profile-link" id="profile-toggle">
-                    <img src="user.png" alt="User Profile" class="user-profile-picture">
-                </a>
-
-                <div class="dropdown-menu" id="profile-menu">
-                    <a href="account.html"><i class="fas fa-cog"></i> <span>Settings</span></a>
-                    <a href="billing.html"><i class="fas fa-wallet"></i> <span>Billing</span></a>
-                    <div class="dropdown-divider"></div>
-                    <a href="login.html" class="logout-link"><i class="fas fa-sign-out-alt"></i> <span>Log Out</span></a>
-                </div>
-            </div>
+            <!-- Profile icon now directly links to account.html -->
+            <a href="account.html" class="user-profile-link">
+                <img src="user.png" alt="User Profile" class="user-profile-picture">
+            </a>
         </div>
     </header>
 
@@ -54,8 +46,13 @@
         <main class="main-content">
             <!-- Total Bill Card -->
             <div class="card card-total-bill">
-                <span class="currency-symbol">₱</span>
-                <span class="bill-amount">3,280</span>
+                <div class="card-total-bill-header">
+                    <span class="dashboard-title">Dashboard</span>
+                    <div>
+                        <span class="currency-symbol">₱</span>
+                        <span class="bill-amount">3,280</span>
+                    </div>
+                </div>
                 <p>Total: 275 Kwh - Average daily: 9.2 Kwh</p>
             </div>
 
@@ -107,7 +104,6 @@
                 <h3>Billing Cycle</h3>
                 <div class="billing-content">
                     <img src="C:\Users\Admin\Downloads\bill-calculator-app-quinio\billing.png" alt="Billing Cycle Chart" class="chart-img">
-                    <span class="billing-days-left">8 days left</span>
                 </div>
             </div>
         </main>
