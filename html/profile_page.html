@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Account - WiseWatts</title>
+
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&family=Roboto+Serif:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+</head>
+
+<body class="page-dashboard">
+    <header class="navbar">
+        <div class="logo">
+            <img src="../images/removebg-removebg-preview.png" alt="WiseWatts Logo" />
+            <h1>WiseWatts</h1>
+        </div>
+
+        <div class="nav-right">
+            <a href="profile_page.html" class="user-profile-link">
+                <img src="../images/user.png" alt="User Profile" class="user-profile-picture">
+            </a>
+        </div>
+    </header>
+
+            <div class="dashboard-container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="user_dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a href="calculator_page.html"><i class="fas fa-calculator"></i> Calculator</a></li>
+                    <li><a href="results_page.html"><i class="fas fa-file-invoice"></i> Records</a></li>
+                    <li><a class="active" href="profile_page.html"><i class="fas fa-user"></i> Account</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <h2 class="account-title">Account</h2>
+
+            <div class="profile-box">
+                <div class="profile-left">
+                    <div class="profile-photo">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="profile-text">
+                        <h2 id="display_name">Mark Cyrell Quinio</h2>
+                        <p id="display_email">markcyrellquinio@example.com</p>
+                    </div>
+                </div>
+                <button class="view-icon" title="View Profile" onclick="openProfileView()">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+
+            <!-- Profile View Modal (read-only) -->
+            <div id="profileViewModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Profile Details</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="detail-row"><label>Name:</label><span id="view_name"></span></div>
+                        <div class="detail-row"><label>Email:</label><span id="view_email"></span></div>
+                        <div class="detail-row"><label>Phone:</label><span id="view_phone"></span></div>
+                        <div class="detail-row"><label>Address:</label><span id="view_address"></span></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-close-modal" onclick="document.getElementById('profileViewModal').style.display='none'">Close</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Modal (edit) -->
+            <div id="profileModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Profile</h3>
+                        <span class="close close-danger">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="detail-row">
+                            <label for="profile_name">Name:</label>
+                            <input id="profile_name" type="text" />
+                        </div>
+                        <div class="detail-row">
+                            <label for="profile_email">Email:</label>
+                            <input id="profile_email" type="email" />
+                        </div>
+                        <div class="detail-row">
+                            <label for="profile_phone">Phone:</label>
+                            <input id="profile_phone" type="text" />
+                        </div>
+                        <div class="detail-row">
+                            <label for="profile_address">Address:</label>
+                            <input id="profile_address" type="text" />
+                        </div>
+
+                        <div id="passwordSection">
+                            <h4>Change Password</h4>
+                            <div class="detail-row">
+                                <label for="new_password">New Password:</label>
+                                <input id="new_password" type="password" />
+                            </div>
+                            <div class="detail-row">
+                                <label for="confirm_new_password">Confirm:</label>
+                                <input id="confirm_new_password" type="password" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="saveProfileBtn" class="btn-close-modal">Save Profile</button>
+                        <button id="changePasswordBtn" class="btn-close-modal">Change Password</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="account-list">
+                <div class="account-item" onclick="openProfileModalFor('name')">
+                    <i class="fas fa-user"></i> Name
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+
+                <div class="account-item" onclick="openProfileModalFor('email')">
+                    <i class="fas fa-envelope"></i> Email
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+
+                <div class="account-item" onclick="openProfileModalFor('phone')">
+                    <i class="fas fa-phone"></i> Phone Number
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+
+                <div class="account-item" onclick="openProfileModalFor('address')">
+                    <i class="fas fa-home"></i> Address
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+
+                <div class="account-item" onclick="openProfileModalFor('change-password')">
+                    <i class="fas fa-lock"></i> Change Password
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+
+                <div class="account-item logout-link" onclick="handleLogout()">
+                    <i class="fas fa-sign-out-alt"></i> Log Out
+                </div>
+            </div>
+        </main>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase-config.js"></script>
+<script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const session = await initAuth();
+            if (session) {
+                const user = await getCurrentUser();
+                if (user) {
+                    const pendingEmail = localStorage.getItem('pending_email');
+                    if (pendingEmail) {
+                        if (user.email === pendingEmail) {
+                            localStorage.removeItem('pending_email');
+                        }
+                        const storedUserId = localStorage.getItem('last_user_id');
+                        if (storedUserId !== user.id) {
+                            localStorage.removeItem('pending_email');
+                            localStorage.setItem('last_user_id', user.id);
+                        }
+                    } else {
+                        localStorage.setItem('last_user_id', user.id);
+                    }
+                }
+                await loadUserProfile();
+            }
+        });
+
+        async function loadUserProfile() {
+            const user = await getCurrentUser();
+            if (user) {
+                if (user.user_metadata?.full_name) {
+                    document.getElementById('profile_name').value = user.user_metadata.full_name;
+                    document.getElementById('display_name').textContent = user.user_metadata.full_name;
+                }
+                
+                const displayEmail = localStorage.getItem('pending_email') || user.email;
+                document.getElementById('profile_email').value = displayEmail;
+                document.getElementById('display_email').textContent = displayEmail;
+                
+                if (user.user_metadata?.phone) {
+                    document.getElementById('profile_phone').value = user.user_metadata.phone;
+                }
+                if (user.user_metadata?.address) {
+                    document.getElementById('profile_address').value = user.user_metadata.address;
+                }
+            }
+        }
+
+        async function handleProfileUpdate() {
+            const user = await getCurrentUser();
+            if (!user) {
+                alert('You must be logged in to update your profile!');
+                return;
+            }
+
+            try {
+                const updateData = { data: {} };
+                let emailChanged = false;
+
+                if (currentEditingField === 'name') {
+                    const name = document.getElementById('profile_name').value;
+                    updateData.data.full_name = name;
+                } else if (currentEditingField === 'email') {
+                    const email = document.getElementById('profile_email').value;
+                    updateData.email = email;
+                    emailChanged = email !== user.email;
+                } else if (currentEditingField === 'phone') {
+                    const phone = document.getElementById('profile_phone').value;
+                    updateData.data.phone = phone;
+                } else if (currentEditingField === 'address') {
+                    const address = document.getElementById('profile_address').value;
+                    updateData.data.address = address;
+                }
+
+                const { data, error } = await supabaseClient.auth.updateUser(updateData);
+
+                if (error) {
+                    alert('Error updating profile: ' + error.message);
+                    return;
+                }
+
+                if (emailChanged) {
+                    const email = document.getElementById('profile_email').value;
+                    localStorage.setItem('pending_email', email);
+                    alert('Email updated! Please verify your new email address. Check your inbox for a confirmation link.');
+                }
+
+                await loadUserProfile();
+                
+                document.getElementById('profileModal').style.display = 'none';
+                currentEditingField = null;
+            } catch (error) {
+                alert('Error updating profile: ' + error.message);
+            }
+        }
+
+        function openProfileModal() {
+            const modal = document.getElementById('profileModal');
+            modal.style.display = 'block';
+        }
+
+        async function openProfileView() {
+            const modal = document.getElementById('profileViewModal');
+            const user = await getCurrentUser();
+            if (!user) return;
+            document.getElementById('view_name').textContent = user.user_metadata?.full_name || '';
+            document.getElementById('view_email').textContent = user.email || '';
+            document.getElementById('view_phone').textContent = user.user_metadata?.phone || '';
+            document.getElementById('view_address').textContent = user.user_metadata?.address || '';
+            modal.style.display = 'block';
+        }
+
+        let currentEditingField = null;
+
+        async function openProfileModalFor(field) {
+            currentEditingField = field;
+            await loadUserProfile();
+            const modal = document.getElementById('profileModal');
+
+            const rows = ['profile_name','profile_email','profile_phone','profile_address','new_password','confirm_new_password'];
+            rows.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && el.closest) {
+                    const row = el.closest('.detail-row');
+                    if (row) row.style.display = 'none';
+                }
+            });
+            const pwdSection = document.getElementById('passwordSection');
+            if (pwdSection) pwdSection.style.display = 'none';
+
+            if (field === 'name') {
+                document.getElementById('profile_name').closest('.detail-row').style.display = 'flex';
+                document.getElementById('saveProfileBtn').style.display = 'inline-block';
+                document.getElementById('changePasswordBtn').style.display = 'none';
+                setTimeout(() => document.getElementById('profile_name').focus(), 120);
+            } else if (field === 'email') {
+                document.getElementById('profile_email').closest('.detail-row').style.display = 'flex';
+                document.getElementById('saveProfileBtn').style.display = 'inline-block';
+                document.getElementById('changePasswordBtn').style.display = 'none';
+                setTimeout(() => document.getElementById('profile_email').focus(), 120);
+            } else if (field === 'phone') {
+                document.getElementById('profile_phone').closest('.detail-row').style.display = 'flex';
+                document.getElementById('saveProfileBtn').style.display = 'inline-block';
+                document.getElementById('changePasswordBtn').style.display = 'none';
+                setTimeout(() => document.getElementById('profile_phone').focus(), 120);
+            } else if (field === 'address') {
+                document.getElementById('profile_address').closest('.detail-row').style.display = 'flex';
+                document.getElementById('saveProfileBtn').style.display = 'inline-block';
+                document.getElementById('changePasswordBtn').style.display = 'none';
+                setTimeout(() => document.getElementById('profile_address').focus(), 120);
+            } else if (field === 'change-password') {
+                if (pwdSection) pwdSection.style.display = 'block';
+                const newPwdRow = document.getElementById('new_password').closest('.detail-row');
+                const confRow = document.getElementById('confirm_new_password').closest('.detail-row');
+                if (newPwdRow) newPwdRow.style.display = 'flex';
+                if (confRow) confRow.style.display = 'flex';
+                document.getElementById('saveProfileBtn').style.display = 'none';
+                document.getElementById('changePasswordBtn').style.display = 'inline-block';
+                setTimeout(() => document.getElementById('new_password').focus(), 120);
+            } else {
+                rows.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el && el.closest) {
+                        const row = el.closest('.detail-row');
+                        if (row) row.style.display = 'flex';
+                    }
+                });
+                if (pwdSection) pwdSection.style.display = 'block';
+                document.getElementById('saveProfileBtn').style.display = 'inline-block';
+                document.getElementById('changePasswordBtn').style.display = 'inline-block';
+            }
+
+            modal.style.display = 'block';
+        }
+
+        (function setupProfileModal() {
+            document.addEventListener('DOMContentLoaded', () => {
+                const modal = document.getElementById('profileModal');
+                const closeBtn = modal.querySelector('.close');
+                const saveBtn = document.getElementById('saveProfileBtn');
+                const changePasswordBtn = document.getElementById('changePasswordBtn');
+
+                if (closeBtn) closeBtn.addEventListener('click', () => modal.style.display = 'none');
+                if (saveBtn) saveBtn.addEventListener('click', async () => {
+                    await handleProfileUpdate();
+                    modal.style.display = 'none';
+                });
+
+                if (changePasswordBtn) changePasswordBtn.addEventListener('click', async () => {
+                    await handleChangePassword();
+                });
+
+                window.addEventListener('click', (event) => {
+                    if (event.target === modal) modal.style.display = 'none';
+                });
+            });
+            document.addEventListener('DOMContentLoaded', () => {
+                const viewModal = document.getElementById('profileViewModal');
+                if (!viewModal) return;
+                const viewClose = viewModal.querySelector('.close');
+                if (viewClose) viewClose.addEventListener('click', () => viewModal.style.display = 'none');
+                window.addEventListener('click', (event) => {
+                    if (event.target === viewModal) viewModal.style.display = 'none';
+                });
+            });
+        })();
+
+        async function handleChangePassword() {
+            const newPassword = document.getElementById('new_password').value;
+            const confirmPassword = document.getElementById('confirm_new_password').value;
+
+            if (!newPassword || !confirmPassword) {
+                alert('Please fill both password fields.');
+                return;
+            }
+            if (newPassword !== confirmPassword) {
+                alert('Passwords do not match.');
+                return;
+            }
+
+            try {
+                const { data, error } = await supabaseClient.auth.updateUser({ password: newPassword });
+                if (error) {
+                    alert('Error updating password: ' + error.message);
+                    return;
+                }
+                
+                document.getElementById('profileModal').style.display = 'none';
+                document.getElementById('new_password').value = '';
+                document.getElementById('confirm_new_password').value = '';
+                
+                alert('Password changed successfully!');
+            } catch (error) {
+                alert('Error updating password: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

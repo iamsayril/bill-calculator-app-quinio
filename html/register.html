@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - WiseWatts</title>
+    <link rel="stylesheet" href="../css/register.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700&family=Poppins:wght@400;600;900&family=Roboto+Serif:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="page-form">
+
+    <header class="navbar">
+        <div class="logo">
+        <img src="../images/removebg-removebg-preview.png" alt="WiseWatts Logo" />
+        <h1>WiseWatts</h1>
+        </div>
+
+        <div class="nav-right">
+          <nav>
+                <a href="index.html">Home</a>
+             <a href="index.html#features">About</a>
+         </nav>
+         <a href="login.html" class="signin-btn">Sign In</a>
+        </div>
+    </header>
+
+
+    <div class="form-page-container">
+        <h2 class="form-title">Create <span class="accent">Account</span></h2>
+        
+        <form onsubmit="event.preventDefault(); handleRegister();">
+                <div class="name-row">
+                    <div class="name-field">
+                        <label for="first_name">First Name</label>
+                        <input
+                            type="text"
+                            id="first_name"
+                            name="first_name"
+                            placeholder="First name"
+                            required
+                        />
+                    </div>
+                    <div class="name-field">
+                        <label for="last_name">Last Name</label>
+                        <input
+                            type="text"
+                            id="last_name"
+                            name="last_name"
+                            placeholder="Last name"
+                            required
+                        />
+                    </div>
+                </div>
+
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Your email"
+                    required
+                />
+
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                />
+
+                <label for="confirm_password">Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirm_password"
+                    name="confirm_password"
+                    placeholder="Confirm your password"
+                    required
+                />
+
+                <input type="submit" value="Sign Up" />
+            </form>
+            
+        <p class="terms-text">
+            By clicking this button, you agree with our <a href="#">Terms and Conditions</a>
+        </p>
+
+        <p class="login-link">
+            Already have an account? <a href="login.html">Sign In</a>
+        </p>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase-config.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        await redirectIfAuthenticated();
+    });
+
+    async function handleRegister() {
+        const firstName = document.getElementById("first_name").value;
+        const lastName = document.getElementById("last_name").value;
+        const name = `${firstName} ${lastName}`.trim();
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirm_password").value;
+
+        if (!name || !email || !password || !confirmPassword) {
+            alert("Please fill in all fields!");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        if (password.length < 6) {
+            alert("Password must be at least 6 characters long!");
+            return;
+        }
+
+        const submitBtn = document.querySelector(
+            'input[type="submit"]'
+        );
+        const originalValue = submitBtn.value;
+        submitBtn.value = "Registering...";
+        submitBtn.disabled = true;
+
+        try {
+            const { data, error } = await supabaseClient.auth.signUp({
+                email: email,
+                password: password,
+                options: {
+                    data: {
+                        full_name: name,
+                    },
+                },
+            });
+
+            if (error) {
+                alert("Registration failed: " + error.message);
+                submitBtn.value = originalValue;
+                submitBtn.disabled = false;
+                return;
+            }
+
+            alert(
+                "Registration successful! Please check your email to verify your account, then login."
+            );
+            window.location.href = "login.html";
+        } catch (error) {
+            alert("An error occurred: " + error.message);
+            submitBtn.value = originalValue;
+            submitBtn.disabled = false;
+        }
+    }
+</script>
+
+</body>
+</html>
+

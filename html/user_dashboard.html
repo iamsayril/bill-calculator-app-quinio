@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - WiseWatts</title>
 
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="../css/dashboard.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&family=Roboto+Serif:wght@400;600;700;900&display=swap" rel="stylesheet">
 </head>
@@ -14,13 +14,13 @@
 
     <header class="navbar">
         <div class="logo">
-            <img src="removebg-removebg-preview.png" alt="WiseWatts Logo" />
+            <img src="../images/removebg-removebg-preview.png" alt="WiseWatts Logo" />
             <h1>WiseWatts</h1>
         </div>
 
         <div class="nav-right">
-            <a href="account.html" class="user-profile-link">
-                <img src="user.png" alt="User Profile" class="user-profile-picture">
+            <a href="profile_page.html" class="user-profile-link">
+                <img src="../images/user.png" alt="User Profile" class="user-profile-picture">
             </a>
         </div>
     </header>
@@ -30,15 +30,18 @@
         <aside class="sidebar">
             <nav class="sidebar-nav">
                 <ul>
-                    <li><a class="active" href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-                    <li><a href="calculator.html"><i class="fas fa-calculator"></i> Calculator</a></li>
-                    <li><a href="records.html"><i class="fas fa-file-invoice"></i> Records</a></li>
-                    <li><a href="account.html"><i class="fas fa-user"></i> Account</a></li>
+                    <li><a class="active" href="user_dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a href="calculator_page.html"><i class="fas fa-calculator"></i> Calculator</a></li>
+                    <li><a href="results_page.html"><i class="fas fa-file-invoice"></i> Records</a></li>
+                    <li><a href="profile_page.html"><i class="fas fa-user"></i> Account</a></li>
                 </ul>
             </nav>
         </aside>
 
         <main class="main-content">
+
+            <h1 class="welcome-text">Welcome back, User!</h1>
+            <p class="welcome-subtitle">Manage your electricity bill calculations.</p>
 
             <div class="card card-total-bill">
                 <div class="card-total-bill-header">
@@ -55,7 +58,7 @@
                 <div class="card card-usage">
                     <h3>Usage This Month</h3>
                     <div class="chart-container">
-                        <img src="graph-up.png" alt="Usage This Month Chart" class="chart-img">
+                        <img src="../images/graph-up.png" alt="Usage This Month Chart" class="chart-img">
                     </div>
                 </div>
 
@@ -63,7 +66,7 @@
                     <h3>Appliance Consumption</h3>
                     <div class="appliance-chart-content">
                         <div class="chart-pie-wrapper">
-                            <img src="pie-chart.png" alt="Appliance Consumption Chart" class="chart-img">
+                            <img src="../images/pie-chart.png" alt="Appliance Consumption Chart" class="chart-img">
                         </div>
                         <div class="chart-legend">
                             <div class="legend-item">
@@ -94,10 +97,31 @@
             <div class="card card-billing">
                 <h3>Billing Cycle</h3>
                 <div class="billing-content">
-                    <img src="billing.png" alt="Billing Cycle Chart" class="chart-img">
+                    <img src="../images/billing.png" alt="Billing Cycle Chart" class="chart-img">
                 </div>
             </div>
         </main>
     </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase-config.js"></script>
+<script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const session = await initAuth();
+            if (session) {
+                const user = await getCurrentUser();
+                if (user) {
+                    const welcomeText = document.querySelector('.welcome-text');
+                    const userName = user.user_metadata?.full_name || user.email;
+                    if (welcomeText) {
+                        welcomeText.innerHTML = `Welcome back,<span class="user-name"></span>!`;
+                        const nameEl = welcomeText.querySelector('.user-name');
+                        if (nameEl) nameEl.textContent = userName;
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>

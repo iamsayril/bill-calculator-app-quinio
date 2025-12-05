@@ -14,12 +14,79 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: var(--color-primary); 
-    background-color: #A8A29A; 
+    background: #A8A29A; 
+    background-color: #A8A29A;
+    font-family: 'Poppins', sans-serif;
 }
 
 .navbar {
-    background-color: #A8A29A; 
+    width: 100%;
+    max-width: 1440px;
+    padding: 30px 75px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    width: 75px;
+    height: auto;
+}
+
+.logo h1 {
+    font-size: 36px;
+    font-family: 'Roboto Serif', serif;
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+.nav-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 16px;
+    transition: color 0.3s;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #F7A70C;
+}
+
+.signin-btn {
+    background: #1F1F1F;
+    padding: 8px 22px;
+    color: #FFFFFF;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'Roboto Serif', serif;
+    font-weight: 600;
+    transition: background 0.3s;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.signin-btn:hover {
+    background: #4a2d1a;
 }
 
 .form-page-container {
@@ -51,20 +118,20 @@ body.login-page .form-page-container {
     font-family: 'Roboto Serif', serif;
     font-size: 50px;
     font-weight: 700;
-    color: var(--color-white);
-    margin-bottom: 0; 
+    color: #FFFFFF; 
     white-space: nowrap;
     margin-top: -20px;
+    margin-bottom: 60px;
 }
 
 body.login-page .form-title {
     margin-top: -20px;
-    margin-bottom: 0;
+    margin-bottom: 60px;
     font-size: 50px;
 }
 
 .form-wrapper .form-title {
-    margin-bottom: 30px;
+    margin-bottom: 60px;
 }
 
 .form-title .accent {
@@ -76,6 +143,82 @@ body.login-page .form-title {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form label {
+    display: none;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+    width: 300px;
+    max-width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    background-color: #EFEFEF;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    color: #1F1F1F;
+    transition: box-shadow 0.2s, border-color 0.2s, background-color 0.2s;
+    margin-bottom: 20px;
+}
+
+.name-row {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.name-row .name-field {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.name-row .name-field input {
+    width: 100%;
+    box-sizing: border-box;
+}
+.name-row .name-field input {
+    margin-bottom: 0;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus {
+    box-shadow: 0 0 0 2px #F7A70C;
+    border-color: #F7A70C;
+    outline: none;
+    background-color: #FFFFFF;
+}
+
+form input[type="submit"] {
+    width: 300px;
+    max-width: 100%;
+    background: #1F1F1F;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-family: 'Roboto Serif', serif;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .input-group {
@@ -97,19 +240,19 @@ body.login-page .form-title {
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); 
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
-    color: var(--color-dark);
+    color: #1F1F1F;
     transition: box-shadow 0.2s, border-color 0.2s, background-color 0.2s;
 }
 
 .input-group:focus-within .icon {
-    color: var(--color-accent-gold);
+    color: #F7A70C;
 }
 
 .input-group input:focus {
-    box-shadow: 0 0 0 2px var(--color-accent-gold);
-    border-color: var(--color-accent-gold); 
+    box-shadow: 0 0 0 2px #F7A70C;
+    border-color: #F7A70C; 
     outline: none;
-    background-color: var(--color-white);
+    background-color: #FFFFFF;
 }
 
 .input-group .icon {
@@ -145,11 +288,11 @@ body.login-page .form-title {
 
 .sign-up-btn {
     width: 300px; 
-    background: var(--color-dark);
+    background: #1F1F1F;
     padding: 14px;
     border: none;
     border-radius: 8px;
-    color: var(--color-white);
+    color: #FFFFFF;
     font-size: 18px;
     font-family: 'Roboto Serif', serif;
     font-weight: 600;
@@ -165,25 +308,24 @@ body.login-page .form-title {
 
 .terms-text {
     margin-top: 15px;
-    font-size: 13px;
-    color: #ffffff; 
-}
-
-.forgot-password-link {
-    margin-top: 15px;
+    font-size: 14px;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
 }
 
 .terms-text a,
-.login-link a,
-.forgot-password-link a {
+.login-link a {
     color: #0866ff;
-    text-decoration: none; 
-    font-weight: 600;
-    font-size: 13px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    transition: color 0.2s ease, transform 0.12s ease;
 }
 
 .login-link a:hover {
-    text-decoration: none;
+    color: #0056d6;
+    text-decoration: underline;
+    transform: translateY(-1px);
 }
 
 .separator {
@@ -208,15 +350,16 @@ body.login-page .form-title {
     cursor: pointer;
     transition: background 0.3s;
     font-family: 'Poppins', sans-serif;
-    font-weight: 600;/* remove underline */
+    font-weight: 600;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
+    text-decoration: none;
 }
 
 .google-btn {
-    background-color: var(--color-white);
+    background-color: #FFFFFF;
     color: #3a210d;
     border: 1px solid #ccc;
 }
@@ -227,7 +370,7 @@ body.login-page .form-title {
 
 .facebook-btn {
     background-color: #3b5998;
-    color: var(--color-white);
+    color: #FFFFFF;
     border: 1px solid #3b5998;
 }
 
@@ -236,8 +379,12 @@ body.login-page .form-title {
 }
 
 .login-link {
-    font-size: 13px;
+    font-size: 14px;
     color: #ffffff;
+    margin-top: 25px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    font-family: 'Poppins', sans-serif;
 }
 
 
@@ -269,7 +416,7 @@ body.login-page .form-title {
 
 .success-icon {
     font-size: 50px;
-    color: var(--color-accent-gold);
+    color: #F7A70C;
     margin-bottom: 0;
 }
 
@@ -277,9 +424,9 @@ body.login-page .form-title {
     margin-top: 30px;
     font-size: 16px;
     font-weight: 600;
-    color: var(--color-accent-gold);
+    color: #F7A70C;
     text-decoration: none;
-    background-color: var(--color-dark);
+    background-color: #1F1F1F;
     padding: 12px 24px;
     border-radius: 8px;
     transition: background-color 0.3s;
@@ -327,9 +474,32 @@ body.login-page .form-title {
     .success-icon {
         font-size: 40px;
     }
+
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"],
+    form input[type="submit"] {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .name-row {
+        flex-direction: column;
+        max-width: 100%;
+        gap: 10px;
+    }
+
+    .name-row .name-field {
+        margin-bottom: 0;
+    }
+
+    .name-row .name-field input {
+        margin-bottom: 20px;
+    }
 }
 
 body.login-page .form-page-container {
     margin-top: -30px;
     padding-top: 0px;
 }
+

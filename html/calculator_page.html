@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator - WiseWatts</title>
+
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&family=Roboto+Serif:wght@400;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body class="page-dashboard">
+
+    <header class="navbar">
+        <div class="logo">
+            <img src="../images/removebg-removebg-preview.png" alt="WiseWatts Logo" />
+            <h1>WiseWatts</h1>
+        </div>
+
+        <div class="nav-right">
+            <a href="profile_page.html" class="user-profile-link">
+                <img src="../images/user.png" alt="User Profile" class="user-profile-picture">
+            </a>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="user_dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a class="active" href="calculator_page.html"><i class="fas fa-calculator"></i> Calculator</a></li>
+                    <li><a href="results_page.html"><i class="fas fa-file-invoice"></i> Records</a></li>
+                    <li><a href="profile_page.html"><i class="fas fa-user"></i> Account</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+
+        <main class="main-content" style="font-family: 'Poppins', sans-serif;">
+            <div class="calculator-card">
+                <h2 style="font-family: 'Roboto Serif', serif;">Electric Bill Calculator</h2>
+
+                <div class="calculator-grid">
+                    <div class="calc-input">
+                        <label for="month">Month</label>
+                        <input type="text" id="month" placeholder="e.g., November 2025">
+                    </div>
+
+                    <div class="calc-input">
+                        <label for="cost_per_kwh">Cost Per kWh</label>
+                        <input type="number" id="cost_per_kwh" placeholder="e.g., 10.50">
+                    </div>
+
+                    <div class="calc-input">
+                        <label for="power_consumption">Power Consumption (kWh)</label>
+                        <input type="number" id="power_consumption" placeholder="e.g., 150">
+                    </div>
+
+                    <div class="calc-output" style="grid-column: span 2;">
+                         <label>Total Bill</label>
+                        <div id="result">₱0.00</div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="button" id="btn_calculate" class="calculate-btn">Calculate</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase-config.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        await initAuth();
+    });
+
+    const btn_calculate = document.getElementById("btn_calculate");
+    const cost_per_kwh = document.getElementById("cost_per_kwh");
+    const power_consumption = document.getElementById("power_consumption");
+    const result = document.getElementById("result");
+    const month = document.getElementById("month");
+
+    btn_calculate.addEventListener("click", async function () {
+        if (
+            !month.value ||
+            !power_consumption.value ||
+            !cost_per_kwh.value
+        ) {
+            alert("Please fill in all fields!");
+            return;
+        }
+
+        let result_value =
+            parseFloat(cost_per_kwh.value) *
+            parseFloat(power_consumption.value);
+
+        result.innerHTML = `₱${result_value.toFixed(2)}`;
+
+        const user = await getCurrentUser();
+        if (!user) {
+            alert("You must be logged in to save calculations!");
+            window.location.href = "login.html";
+            return;
+        }
+
+        try {
+            const { data, error } = await supabaseClient
+                .from("calculations")
+                .insert([
+                    {
+                        user_id: user.id,
+                        month: month.value,
+                        power_consumption: parseFloat(
+                            power_consumption.value
+                        ),
+                        cost_per_kwh: parseFloat(cost_per_kwh.value),
+                        result: result_value,
+                    },
+                ])
+                .select();
+
+            if (error) {
+                console.error("Error saving calculation:", error);
+            } else {
+                console.log("Calculation saved:", data);
+                window.location.href = "results_page.html";
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    });
+</script>
+</body>
+</html>

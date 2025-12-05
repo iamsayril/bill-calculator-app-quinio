@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - WiseWatts</title>
+    <link rel="stylesheet" href="../css/register.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700&family=Poppins:wght@400;600;900&family=Roboto+Serif:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="login-page">
+    
+    <header class="navbar">
+        <div class="logo">
+          <img src="../images/removebg-removebg-preview.png" alt="WiseWatts Logo" />
+          <h1>WiseWatts</h1>
+        </div>
+
+        <div class="nav-right">
+            <nav>
+              <a href="index.html">Home</a>
+             <a href="index.html#features">About</a>
+            </nav>
+         <a href="register.html" class="signin-btn">Sign Up</a>
+        </div>
+    </header>
+
+
+    <div class="form-page-container">
+        
+        <h2 class="form-title">Sign <span class="accent">In</span></h2>
+        
+        <form onsubmit="event.preventDefault(); handleLogin();">
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Your email"
+                    required
+                />
+
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                />
+
+                <input type="submit" value="Login" />
+            </form>
+
+        <p class="login-link">
+            Don't have an account? <a href="register.html">Sign Up</a>
+        </p>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase-config.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        await redirectIfAuthenticated();
+    });
+
+    async function handleLogin() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        if (!email || !password) {
+            alert("Please fill in all fields!");
+            return;
+        }
+
+        const submitBtn = document.querySelector(
+            'input[type="submit"]'
+        );
+        const originalValue = submitBtn.value;
+        submitBtn.value = "Logging in...";
+        submitBtn.disabled = true;
+
+        try {
+            const { data, error } =
+                await supabaseClient.auth.signInWithPassword({
+                    email: email,
+                    password: password,
+                });
+
+            if (error) {
+                alert("Login failed: " + error.message);
+                submitBtn.value = originalValue;
+                submitBtn.disabled = false;
+                return;
+            }
+
+            window.location.href = "user_dashboard.html";
+        } catch (error) {
+            alert("An error occurred: " + error.message);
+            submitBtn.value = originalValue;
+            submitBtn.disabled = false;
+        }
+    }
+</script>
+</body>
+</html>
+

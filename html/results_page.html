@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Records - WiseWatts</title>
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700&family=Poppins:wght@400;600;900&family=Roboto+Serif:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body class="page-dashboard">
+
+    <header class="navbar">
+        <div class="logo">
+            <img src="../images/removebg-removebg-preview.png" alt="WiseWatts Logo" />
+            <h1>WiseWatts</h1>
+        </div>
+
+        <div class="nav-right">
+            <a href="profile_page.html" class="user-profile-link">
+                <img src="../images/user.png" alt="User Profile" class="user-profile-picture">
+            </a>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="user_dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a href="calculator_page.html"><i class="fas fa-calculator"></i> Calculator</a></li>
+                    <li><a href="results_page.html" class="active"><i class="fas fa-file-invoice"></i> Records</a></li>
+                    <li><a href="profile_page.html"><i class="fas fa-user"></i> Account</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+
+            <div class="records-card">
+                <h2>Saved Records</h2>
+
+                <table id="myTable" class="records-table">
+                    <thead>
+                        <tr>
+                            <th>Month</th>
+                            <th>kWh</th>
+                            <th>Rate</th>
+                            <th>Total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td colspan="5"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <!-- View Details Modal -->
+            <div id="viewModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Calculation Details</h3>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="detail-row">
+                            <label>Month:</label>
+                            <span id="detailMonth"></span>
+                        </div>
+                        <div class="detail-row">
+                            <label>Power Consumption (kWh):</label>
+                            <span id="detailPowerConsumption"></span>
+                        </div>
+                        <div class="detail-row">
+                            <label>Cost per kWh:</label>
+                            <span id="detailCostPerKwh"></span>
+                        </div>
+                        <div class="detail-row">
+                            <label>Total Bill:</label>
+                            <span id="detailResult"></span>
+                        </div>
+                        <div class="detail-row">
+                            <label>Created:</label>
+                            <span id="detailCreatedAt"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-close-modal">Close</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase-config.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const session = await initAuth();
+            if (session) {
+                await loadCalculations();
+            }
+        });
+
+        async function loadCalculations() {
+            const user = await getCurrentUser();
+            if (!user) {
+                return;
+            }
+
+            function formatNumber(value) {
+                return Number(value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+            function formatCurrency(value) {
+                return '₱ ' + Number(value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('calculations')
+                    .select('*')
+                    .eq('user_id', user.id)
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    console.error('Error loading calculations:', error);
+                    alert('Error loading calculations: ' + error.message);
+                    return;
+                }
+
+                const table = document.getElementById("myTable");
+                const tbody = table.querySelector('tbody');
+                
+                tbody.innerHTML = '';
+
+                if (data && data.length > 0) {
+                    data.forEach(calc => {
+                        var row = tbody.insertRow();
+                        
+                        var cellMonth = row.insertCell(0);
+                        var cellPowerConsumption = row.insertCell(1);
+                        var cellCostPerKwh = row.insertCell(2);
+                        var cellResult = row.insertCell(3);
+                        var cellActions = row.insertCell(4);
+
+                        cellMonth.innerHTML = calc.month;
+                        cellPowerConsumption.innerHTML = formatNumber(calc.power_consumption);
+                        cellCostPerKwh.innerHTML = formatCurrency(calc.cost_per_kwh);
+                        cellResult.innerHTML = formatCurrency(calc.result);
+                        cellActions.innerHTML = `<button class="btn-view" data-id="${calc.id}">View</button> <button class="btn-delete" data-id="${calc.id}">Delete</button>`;
+                        
+                        const viewBtn = cellActions.querySelector('.btn-view');
+                        viewBtn.addEventListener('click', async () => {
+                            await viewCalculation(calc);
+                        });
+                        
+                        const deleteBtn = cellActions.querySelector('.btn-delete');
+                        deleteBtn.addEventListener('click', async () => {
+                            await deleteCalculation(calc.id);
+                        });
+                    });
+                } else {
+                    var emptyRow = tbody.insertRow();
+                    emptyRow.className = 'empty-row';
+                    var emptyCell = emptyRow.insertCell(0);
+                    emptyCell.colSpan = 5;
+                    emptyCell.className = 'empty-message';
+                    emptyCell.innerHTML = 'No calculations yet. <a href="calculator_page.html">Calculate your first bill</a>';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error loading calculations: ' + error.message);
+            }
+        }
+
+        async function viewCalculation(calc) {
+            function formatCurrency(value) {
+                return '₱ ' + Number(value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+            document.getElementById('detailMonth').textContent = calc.month;
+            document.getElementById('detailPowerConsumption').textContent = Number(calc.power_consumption).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('detailCostPerKwh').textContent = formatCurrency(calc.cost_per_kwh);
+            document.getElementById('detailResult').textContent = formatCurrency(calc.result);
+            
+            const date = new Date(calc.created_at);
+            const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+            document.getElementById('detailCreatedAt').textContent = formattedDate;
+            
+            document.getElementById('viewModal').style.display = 'block';
+        }
+
+        async function deleteCalculation(calculationId) {
+            if (!confirm('Are you sure you want to delete this record?')) {
+                return;
+            }
+
+            try {
+                const { error } = await supabaseClient
+                    .from('calculations')
+                    .delete()
+                    .eq('id', calculationId);
+
+                if (error) {
+                    console.error('Error deleting calculation:', error);
+                    alert('Error deleting record: ' + error.message);
+                    return;
+                }
+
+                alert('Record deleted successfully!');
+                await loadCalculations();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error deleting record: ' + error.message);
+            }
+        }
+
+        const modal = document.getElementById('viewModal');
+        const closeBtn = document.querySelector('.close');
+        const closeModalBtn = document.querySelector('.btn-close-modal');
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+</script>
+
+</html>
